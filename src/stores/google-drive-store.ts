@@ -62,10 +62,15 @@ export default class GoogleDriveStore {
         this.setKey();
         this.client = null;
         this.access_token = localStorage.getItem('google_access_token') ?? '';
-        setTimeout(() => {
-            importExternal('https://accounts.google.com/gsi/client').then(() => this.initialiseClient());
-            importExternal('https://apis.google.com/js/api.js').then(() => this.initialise());
-        }, 3000);
+        // Only load Google API scripts when the client ID is configured
+        if (this.client_id) {
+            setTimeout(() => {
+                importExternal('https://accounts.google.com/gsi/client').then(() => this.initialiseClient());
+                importExternal('https://apis.google.com/js/api.js').then(() => this.initialise());
+            }, 3000);
+        } else {
+            console.warn('[GoogleDriveStore] GD_CLIENT_ID is not defined. Google Drive integration will be disabled.');
+        }
     }
 
     is_google_drive_token_valid = true;
@@ -95,6 +100,10 @@ export default class GoogleDriveStore {
     };
 
     initialiseClient = () => {
+        if (!this.client_id) {
+            console.warn('[GoogleDriveStore] GD_CLIENT_ID is not defined. Google Drive integration will be disabled.');
+            return;
+        }
         this.client = google.accounts.oauth2.initTokenClient({
             client_id: this.client_id,
             scope: this.scope,

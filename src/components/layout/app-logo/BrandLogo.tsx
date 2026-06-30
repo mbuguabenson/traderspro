@@ -11,7 +11,7 @@ type TBrandLogoProps = {
 };
 
 export const BrandLogo = ({
-    width = 120,
+    width = 160,
     height = 32,
     fill = 'currentColor',
     className = ''
@@ -20,56 +20,48 @@ export const BrandLogo = ({
         <svg
             width={width}
             height={height}
-            viewBox="0 0 120 32"
+            viewBox="0 0 160 32"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={className}
-            aria-label="Brand Logo Placeholder"
+            aria-label="TradersHub Logo"
         >
-            {/* [AI] ⚠️ PLACEHOLDER - Replace with your brand's SVG */}
-
-            {/* Dashed border box to indicate placeholder */}
-            <rect
-                x="1"
-                y="1"
-                width="118"
-                height="30"
-                rx="4"
-                opacity="0.3"
-                fill="none"
-            />
-
-            {/* Image icon placeholder */}
-            <g transform="translate(8, 8)">
-                {/* Picture frame icon */}
-                <rect x="0" y="0" width="16" height="16" rx="2" stroke={fill} strokeWidth="1.5" fill="none" opacity="0.4" />
-
-                {/* Mountain/landscape icon inside */}
-                <path
-                    d="M2 12L6 8L9 11L14 6V14H2V12Z"
-                    fill={fill}
-                    opacity="0.3"
-                />
-
-                {/* Sun/circle in corner */}
-                <circle cx="11" cy="5" r="1.5" fill={fill} opacity="0.3" />
+            {/* Sleek icon representing a hub/trading nodes */}
+            <g transform="translate(4, 4)">
+                {/* Node connections */}
+                <path d="M6 12L12 6M12 6L18 12M12 6V18" stroke="#2e3192" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                {/* Hub circles */}
+                <circle cx="6" cy="12" r="2.5" fill={fill} />
+                <circle cx="18" cy="12" r="2.5" fill={fill} />
+                <circle cx="12" cy="6" r="2.5" fill="#2e3192" />
+                <circle cx="12" cy="18" r="2.5" fill="#2e3192" />
             </g>
 
-            {/* "YOUR LOGO" text */}
+            {/* "Traders" Text */}
             <text
-                x="30"
-                y="20"
+                x="34"
+                y="21"
                 fontFamily="system-ui, -apple-system, sans-serif"
-                fontSize="11"
-                fontWeight="500"
+                fontSize="18"
+                fontWeight="700"
                 fill={fill}
-                opacity="0.5"
-                letterSpacing="0.5"
+                letterSpacing="0.2"
             >
-                BRAND LOGO
+                Traders
             </text>
 
-            {/* [/AI] */}
+            {/* "Hub" Text */}
+            <text
+                x="105"
+                y="21"
+                fontFamily="system-ui, -apple-system, sans-serif"
+                fontSize="18"
+                fontWeight="800"
+                fill="#2e3192"
+                letterSpacing="0.2"
+            >
+                Hub
+            </text>
         </svg>
     );
 };

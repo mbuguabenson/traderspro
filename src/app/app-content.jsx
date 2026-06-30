@@ -66,6 +66,33 @@ const AppContent = observer(() => {
         }
     }, [common, connectionStatus]);
 
+    // Hard failsafe: if the WebSocket never opens (e.g. staging server down),
+    // dismiss the loading screen after 7 s so the dashboard is still usable.
+    // Use a ref to avoid stale closure over is_loading state.
+    const is_loading_ref = React.useRef(is_loading);
+    React.useEffect(() => {
+        is_loading_ref.current = is_loading;
+    }, [is_loading]);
+
+    React.useEffect(() => {
+        const failsafe = setTimeout(() => {
+            if (is_loading_ref.current) {
+                console.warn('[AppContent] Loading timeout reached — bypassing loader (WebSocket may be unavailable).');
+                try {
+                    ServerTime.init(common);
+                    app.setDBotEngineStores();
+                    ApiHelpers.setInstance(app.api_helpers_store);
+                } catch (e) {
+                    // helpers may already be initialised — ignore
+                }
+                setIsLoading(false);
+            }
+        }, 7000);
+
+        return () => clearTimeout(failsafe);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const { current_language } = common;
     const html = document.documentElement;
     React.useEffect(() => {
@@ -123,9 +150,14 @@ const AppContent = observer(() => {
         const retrieveActiveSymbols = () => {
             const { active_symbols } = ApiHelpers.instance;
 
-            active_symbols.retrieveActiveSymbols(true).then(() => {
-                setIsLoading(false);
-            });
+            active_symbols.retrieveActiveSymbols(true)
+                .then(() => {
+                    setIsLoading(false);
+                })
+                .catch(error => {
+                    console.error('[AppContent] Failed to retrieve active symbols, bypassing loader:', error);
+                    setIsLoading(false);
+                });
         };
 
         if (ApiHelpers?.instance?.active_symbols) {
