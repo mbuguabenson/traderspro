@@ -1,4 +1,4 @@
-import { clearCodeVerifier, getCodeVerifier, isProduction } from '@/components/shared';
+import { clearCodeVerifier, getCodeVerifier } from '@/components/shared';
 import { ErrorLogger } from '@/utils/error-logger';
 import brandConfig from '../../brand.config.json';
 
@@ -36,8 +36,10 @@ export class OAuthTokenExchangeService {
      * @returns OAuth2 base URL (staging or production)
      */
     private static getOAuth2BaseURL(): string {
-        const environment = isProduction() ? 'production' : 'staging';
-        return brandConfig.platform.auth2_url[environment];
+        // PKCE/OIDC client IDs are registered ONLY on the production OIDC server.
+        // Even for local/staging environments, always use auth.deriv.com to avoid
+        // "invalid_client" errors when hitting staging-auth.deriv.com.
+        return brandConfig.platform.auth2_url.production;
     }
 
     /**
@@ -144,7 +146,8 @@ export class OAuthTokenExchangeService {
 
             const protocol = window.location.protocol;
             const host = window.location.host;
-            const redirectUrl = `${protocol}//${host}`;
+            // Must exactly match the redirect_uri registered with Deriv OAuth
+            const redirectUrl = `${protocol}//${host}/callback`;
 
             const requestBody = new URLSearchParams({
                 grant_type: 'authorization_code',
