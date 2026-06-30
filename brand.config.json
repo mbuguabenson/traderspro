@@ -1,18 +1,18 @@
 {
-    "brand_name": "YourBrand",
-    "brand_domain": "yourbrand.com",
+    "brand_name": "TradersPro",
+    "brand_domain": "traderspro.vercel.app",
     "brand_hostname": {
-        "staging": "staging.yourbrand.com/dashboard",
-        "production": "yourbrand.com/dashboard"
+        "staging": "traderspro.vercel.app/dashboard",
+        "production": "traderspro.vercel.app/dashboard"
     },
-    "domain_name": "YourBrand.com",
+    "domain_name": "traderspro.vercel.app",
     "colors": {
-        "primary": "#3b82f6",
-        "secondary": "#64748b",
-        "tertiary": "#8b5cf6",
+        "primary": "#0091b9",
+        "secondary": "#bae4f0",
+        "tertiary": "#004e9b",
         "success": "#10b981",
-        "danger": "#ef4444",
-        "warning": "#f59e0b",
+        "danger": "#ff6500",
+        "warning": "#ffd500",
         "info": "#0ea5e9",
         "neutral": "#6b7280",
         "black": "#0f172a",
@@ -58,14 +58,14 @@
         "css_variable_prefix": "--brand"
     },
     "platform": {
-        "name": "Trading Bot",
+        "name": "TradersPro",
         "logo": {
             "type": "component",
             "component_name": "BrandLogo",
-            "alt_text": "Trading Bot",
+            "alt_text": "TradersPro",
             "link_url": "/",
             "show_text": false,
-            "text": "Trading Bot"
+            "text": "TradersPro"
         },
         "footer": {
             "enable_language_settings": false,
@@ -73,10 +73,10 @@
         },
         "hostname": {
             "production": {
-                "com": "bot.yourbrand.com"
+                "com": "traderspro.vercel.app"
             },
             "staging": {
-                "com": "staging-bot.yourbrand.com"
+                "com": "staging-traderspro.vercel.app"
             }
         },
         "auth2_url": {

@@ -1,3 +1,4 @@
+import brandConfig from '@/../brand.config.json';
 import { localize } from '@deriv-com/translations';
 
 export type TSidebarItem = {
@@ -8,7 +9,7 @@ export type TSidebarItem = {
 
 export const SIDEBAR_INTRO = (): TSidebarItem[] => [
     {
-        label: localize('Welcome to Deriv Bot!'),
+        label: localize('Welcome to {{platform_name}}!', { platform_name: brandConfig.platform.name }),
         content: [
             {
                 data: localize(
@@ -21,14 +22,14 @@ export const SIDEBAR_INTRO = (): TSidebarItem[] => [
     },
     {
         label: localize('Guide'),
-        content: [{ data: localize('Deriv Bot - your automated trading partner') }],
+        content: [{ data: localize('{{platform_name}} - your automated trading partner', { platform_name: brandConfig.platform.name }) }],
         link: true,
     },
     {
         label: localize('FAQs'),
         content: [
             {
-                data: localize('What is Deriv Bot?'),
+                data: localize('What is {{platform_name}}?', { platform_name: brandConfig.platform.name }),
                 faq_id: 'faq-0',
             },
             {

@@ -6,9 +6,9 @@ type TPlatform = {
 };
 
 const isDomainAllowed = (domain_name: string) => {
-    // This regex will match any official deriv production and testing domain names.
-    // Allowed deriv domains: localhost, binary.sx, binary.com, deriv.com, deriv.be, deriv.me and their subdomains.
-    return /^(((.*)\.)?(localhost:8444|pages.dev|binary\.(sx|com)|deriv.(com|me|be|dev)))$/.test(domain_name);
+    // This regex will match any official deriv production and testing domain names, plus traderspro domains.
+    // Allowed domains: localhost:8443, localhost:8444, pages.dev, binary, deriv, and traderspro.
+    return /^(((.*)\.)?(localhost:8443|localhost:8444|pages.dev|binary\.(sx|com)|deriv\.(com|me|be|dev)|traderspro\.(vercel\.app|com)))$/.test(domain_name);
 };
 
 export const getBrandWebsiteName = () => {
@@ -16,12 +16,13 @@ export const getBrandWebsiteName = () => {
 };
 
 export const getPlatformConfig = (): TPlatform => {
-    const allowed_config_data = config_data.platform;
+    // Clone config to prevent mutating the shared global import
+    const allowed_config_data = { ...config_data.platform };
 
     if (!isDomainAllowed(window.location.host)) {
-        // Remove all official platform logos if the app is hosted under unofficial domain
-        allowed_config_data.logo = '';
+        // Keep logo as an empty object structure to prevent TypeError when properties are accessed
+        allowed_config_data.logo = {} as any;
     }
 
-    return allowed_config_data;
+    return allowed_config_data as any;
 };
