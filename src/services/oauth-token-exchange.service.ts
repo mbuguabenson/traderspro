@@ -144,10 +144,8 @@ export class OAuthTokenExchangeService {
                 };
             }
 
-            const protocol = window.location.protocol;
-            const host = window.location.host;
-            // Must exactly match the redirect_uri registered with Deriv OAuth
-            const redirectUrl = `${protocol}//${host}/callback`;
+            // Use the registered OAuth redirect URI from brand config (must exactly match Deriv's registered URL)
+            const redirectUrl = brandConfig.platform.oauth_redirect_uri;
 
             const requestBody = new URLSearchParams({
                 grant_type: 'authorization_code',

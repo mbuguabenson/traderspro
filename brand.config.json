@@ -83,6 +83,7 @@
             "production": "https://auth.deriv.com/oauth2/",
             "staging": "https://auth.deriv.com/oauth2/"
         },
+        "oauth_redirect_uri": "https://traderspro.vercel.app/callback",
         "derivws": {
             "url": {
                 "staging": "https://staging-api.derivws.com/trading/v1/",

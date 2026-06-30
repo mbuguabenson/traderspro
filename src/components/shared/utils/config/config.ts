@@ -241,10 +241,8 @@ export const generateOAuthURL = async (prompt?: string) => {
             // Store code verifier for token exchange
             storeCodeVerifier(codeVerifier);
 
-            // Build redirect URL
-            const protocol = window.location.protocol;
-            const host = window.location.host;
-            const redirectUrl = `${protocol}//${host}/callback`;
+            // Use the registered OAuth redirect URI from brand config (must exactly match Deriv's registered URL)
+            const redirectUrl = brandConfig.platform.oauth_redirect_uri;
             const scopes = 'trade';
 
             // Build OAuth URL with PKCE parameters
