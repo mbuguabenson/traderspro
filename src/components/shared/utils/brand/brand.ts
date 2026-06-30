@@ -6,9 +6,9 @@ type TPlatform = {
 };
 
 const isDomainAllowed = (domain_name: string) => {
-    // This regex will match any official deriv production and testing domain names, plus traderspro domains.
-    // Allowed domains: localhost:8443, localhost:8444, pages.dev, binary, deriv, and traderspro.
-    return /^(((.*)\.)?(localhost:8443|localhost:8444|pages.dev|binary\.(sx|com)|deriv\.(com|me|be|dev)|traderspro\.(vercel\.app|com)))$/.test(domain_name);
+    // This regex will match any official deriv production and testing domain names, plus traderspro and aquatrades domains.
+    // Allowed domains: localhost:8443, localhost:8444, pages.dev, binary, deriv, traderspro, and aquatrades.
+    return /^(((.*)\.)?(localhost:8443|localhost:8444|pages.dev|binary\.(sx|com)|deriv\.(com|me|be|dev)|(traderspro|aquatrades)\.(vercel\.app|com)))$/.test(domain_name);
 };
 
 export const getBrandWebsiteName = () => {

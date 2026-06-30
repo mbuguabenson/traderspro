@@ -1,11 +1,11 @@
 {
     "brand_name": "TradersPro",
-    "brand_domain": "traderspro.vercel.app",
+    "brand_domain": "aquatrades.vercel.app",
     "brand_hostname": {
-        "staging": "traderspro.vercel.app/dashboard",
-        "production": "traderspro.vercel.app/dashboard"
+        "staging": "aquatrades.vercel.app/dashboard",
+        "production": "aquatrades.vercel.app/dashboard"
     },
-    "domain_name": "traderspro.vercel.app",
+    "domain_name": "aquatrades.vercel.app",
     "colors": {
         "primary": "#0091b9",
         "secondary": "#bae4f0",
@@ -73,17 +73,17 @@
         },
         "hostname": {
             "production": {
-                "com": "traderspro.vercel.app"
+                "com": "aquatrades.vercel.app"
             },
             "staging": {
-                "com": "staging-traderspro.vercel.app"
+                "com": "staging-aquatrades.vercel.app"
             }
         },
         "auth2_url": {
             "production": "https://auth.deriv.com/oauth2/",
             "staging": "https://auth.deriv.com/oauth2/"
         },
-        "oauth_redirect_uri": "https://traderspro.vercel.app/callback",
+        "oauth_redirect_uri": "https://aquatrades.vercel.app/callback",
         "derivws": {
             "url": {
                 "staging": "https://staging-api.derivws.com/trading/v1/",
