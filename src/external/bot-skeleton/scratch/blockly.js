@@ -1,22 +1,10 @@
 import * as BlocklyJavaScript from 'blockly/javascript';
-import * as BlocklyAll from 'blockly';
+import Blockly from 'blockly/index.js';
 import { localize } from '@deriv-com/translations';
 import { setColors } from './hooks/colours.js';
 import goog from './goog.js';
 
 window.goog = goog;
-
-/**
- * Reconstruct a single Blockly namespace object from the named ESM exports.
- * blockly v13 (this fork) ships index.mjs which has NO default export —
- * every class/util is a named export.  We therefore spread them all onto one
- * plain object so legacy code that expects window.Blockly.<Class> keeps working.
- */
-const buildBlocklyNamespace = () => {
-    // BlocklyAll is the ESM namespace; spread all named exports into one object.
-    const ns = { ...BlocklyAll };
-    return ns;
-};
 
 const modifyBlocklyWorkSpaceContextMenu = () => {
     const exclude_item = ['blockInline'];
@@ -41,15 +29,12 @@ const modifyBlocklyWorkSpaceContextMenu = () => {
 };
 
 export const loadBlockly = async isDarkMode => {
-    // Build the Blockly namespace from static named imports (no dynamic import needed).
-    const BlocklyCore = buildBlocklyNamespace();
-
-    if (!BlocklyCore || !BlocklyCore.Generator) {
+    if (!Blockly || !Blockly.Generator) {
         console.error('[loadBlockly] Blockly failed to load — Generator class not found. Skipping workspace initialisation.');
         return;
     }
 
-    window.Blockly = BlocklyCore;
+    window.Blockly = Blockly;
     window.Blockly.Colours = {};
 
     const BlocklyGenerator = new window.Blockly.Generator('code');
